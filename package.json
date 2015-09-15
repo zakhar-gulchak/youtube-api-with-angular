@@ -1,0 +1,20 @@
+{
+  "name": "angular-pipe",
+  "version": "0.0.1",
+  "description"  : "Pipeline from yahoo angular application.",
+  "main"         : "app.js",
+  "author"       : "zahar-g",
+  "private": true,
+  "scripts": {
+    "start": "node app",
+    "postinstall": "bower install && grunt build"
+  },
+  "dependencies": {
+    "express": "~4.12.4",
+    "mongoose": "~4.1.6"
+  },
+  "engines": {
+    "node": "4.x",
+    "npm": "2.14.x"
+  }
+}

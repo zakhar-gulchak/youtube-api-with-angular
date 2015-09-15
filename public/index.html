@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular application with Youtube API</title>
+
+    <!-- Style sheets -->
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/app.css" rel="stylesheet"/>
+
+    <!-- Library Scripts -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+
+    <!-- Application Script -->
+    <script src="app/app.js"></script>
+
+    <!-- Services -->
+    <script src="common/services/common.services.js"></script>
+    <script src="common/services/gapiService.js"></script>
+
+    <!-- Controllers -->
+    <script src="app/welcomeController.js"></script>
+
+</head>
+<body ng-app="youtube-app">
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <a class="navbar-brand"
+               ui-sref="home">Youtube accounting</a>
+            <div class="navbar-header">
+                <button type="button"
+                        class="navbar-toggle"
+                        data-toggle="collapse"
+                        data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a ui-sref="home.upload">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        Upload video</a></li>
+                    <li><a ui-sref="home.upload">
+                        <i class="glyphicon glyphicon-user"></i>
+                        Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div ui-view></div>
+    </div>
+</body>
+</html>
