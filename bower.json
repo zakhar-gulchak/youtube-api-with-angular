@@ -1,0 +1,29 @@
+{
+  "name": "youtube-api",
+  "version": "0.0.1",
+  "homepage": "https://github.com/zahar-g/youtube-api-with-angular",
+  "authors": [
+    "Zakhar Gulchak <z.gulchak@levi9.com>"
+  ],
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-ui-router": "~0.2.15",
+    "angular-resource": "~1.4.5",
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5"
+  }
+}

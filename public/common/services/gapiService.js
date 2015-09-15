@@ -49,12 +49,14 @@
                     console.log('Unauthorized');
                 }
             },
-            loadApiClientInterfaces: function() {
+            loadAPIClientInterfaces: function() {
                 gapi.client.load('youtube', 'v3', function() {
                     internals.handleAPILoaded();
                 });
             },
-            handleAPILoaded: function () {}
+            handleAPILoaded: function () {
+                // todo delete or write some code
+            }
         };
 
         this.authorize = function () {
@@ -105,9 +107,9 @@
             }), str = '';
             request.execute(function (response) {
                 str = JSON.stringify(response.result);
+                debugger;
+                return str;
             });
-
-            return str;
         };
 
         return {

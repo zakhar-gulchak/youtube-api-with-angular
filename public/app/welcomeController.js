@@ -13,7 +13,6 @@
     function WelcomeCtrl (gapiService) {
         var vm = this;
 
-
         vm.search = function(text) {
             var str = gapiService.search(text);
             $('#search-container').html('<pre>' + str + '</pre>');
