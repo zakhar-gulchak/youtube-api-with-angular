@@ -1,29 +1,17 @@
 (function () {
-    "use strict";
-    var app = angular.module("youtube-app", [
-        "common.services",
-        "ui.router"
-    ]);
+    'use strict';
+    var app = angular.module('youtube-app', ['common.services', 'ui.router', 'angular-google-gapi']);
 
-    app.run(function (gapiService) {
-
-    });
-
-    app.config(["$stateProvider",
-        "$urlRouterProvider",
+    app.config(['$stateProvider',
+        '$urlRouterProvider',
         function($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise("/");
+            $urlRouterProvider.otherwise('/');
 
             $stateProvider
-                .state("home", {
-                    url: "/",
-                    templateUrl: "app/welcomeView.html",
-                    controller: 'WelcomeCtrl as vm'
-                })
-                .state('home.search', {
-                    url: 'search/:searchText',
-                    //templateUrl: 'app/search/searchView.html',
-                    controller: 'SearchCtrl as vm'
+                .state('home', {
+                    url: '/',
+                    templateUrl: 'app/homeView.html',
+                    controller: 'HomeCtrl as vm'
                 });
         }]);
 }());

@@ -1,0 +1,33 @@
+<div class="panel panel-primary text-center">
+    <div class="panel-heading" style="font-size:x-large">
+        Youtube API application on AngularJS
+    </div>
+    <img src="images/logo.jpg" style="width:400px;margin:20px"/>
+
+    <div class="panel-body">
+
+        <div class="clearfix">
+            <div class="col-md-3"></div>
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for..." ng-model="text">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="vm.search(text)">Go!</button>
+                </span>
+                </div><!-- /input-group -->
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu4"
+                    ng-repeat="video in vm.videos"
+                    ng-if="vm.videos.length > 0">
+                    <li><a ui-sref="videoDetail({videoId: video.videoId})">{{ video.name }}</a></li>
+                </ul>
+            </div><!-- /.col-lg-6 -->
+            <div class="col-md-3"></div>
+        </div>
+
+        <div>Developed by:</div>
+        <h3>Gulchak Zahar</h3>
+
+        <div>gulchak.zahar@gmail.com</div>
+        <a href="http://github.com/zahar-g">github.com/zahar-g</a>
+    </div>
+</div>

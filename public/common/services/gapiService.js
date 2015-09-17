@@ -2,19 +2,20 @@
  * Created by z.gulchak on 9/15/2015.
  */
 (function () {
-    "use strict";
+    'use strict';
 
     angular
-        .module("common.services")
-        .factory("gapiService", [
-            "$window",
-            gapiService]);
+        .module('common.services')
+        .factory('gapiService', gapiService);
 
-    function gapiService($window) {
+    function gapiService(GAuth, GData) {
         var internals = {
             clientId: '718637650333-fd4d1dd8hj25o9dke4bj6rve41k1n00n.apps.googleusercontent.com',
             //apiKey: 'V4pAvT7D8MRkbaEWnxZxkBoY',
             scopes: 'https://www.googleapis.com/auth/youtube',
+            //loadGAPIUrl: 'https://apis.google.com/js/client.js?onload=initGoogleApi',
+            loadGAPIUrl: 'https://www.googleapis.com/plus/v1/activities?query=Google%2B&orderBy=best',
+            MAX_RESULTS: 50,
 
             triedOnce: false,
 
@@ -23,7 +24,7 @@
             setApiKey: function () {
                 // Step 2: Reference the API key
                 gapi.client.setApiKey(internals.apiKey);
-                $window.setTimeout(internals.checkAuth, 1);
+                setTimeout(internals.checkAuth, 1);
             },
 
             checkAuth: function () {
@@ -49,8 +50,8 @@
                     console.log('Unauthorized');
                 }
             },
-            loadAPIClientInterfaces: function() {
-                gapi.client.load('youtube', 'v3', function() {
+            loadAPIClientInterfaces: function () {
+                gapi.client.load('youtube', 'v3', function () {
                     internals.handleAPILoaded();
                 });
             },
@@ -87,33 +88,33 @@
             return internals.token;
         };
 
-        this.promiseToken = function () {
-            return $q(function (resolve, reject) {
-                setTimeout(function () {
-                    if (internals.token) {
-                        resolve(internals.token);
-                    } else {
-                        console.log('Failed to promise token.');
-                        reject(null);
-                    }
-                }, 1000);
-            });
-        };
-
         this.search = function (q) {
             var request = gapi.client.youtube.search.list({
                 q: q,
+                maxResults: internals.MAX_RESULTS,
                 part: 'snippet'
-            }), str = '';
+            });
             request.execute(function (response) {
-                str = JSON.stringify(response.result);
-                debugger;
-                return str;
+                return JSON.stringify(response.result);
+            });
+        };
+
+        this.getUser = function () {
+            var request = gapi.client.youtube.search.list({
+                q: q,
+                maxResults: internals.MAX_RESULTS,
+                part: 'snippet'
+            });
+            request.execute(function (response) {
+                return JSON.stringify(response.result);
             });
         };
 
         return {
-            search: this.search
+            search: this.search,
+            checkAuth: this.getToken,
+            authorize: this.authorize,
+            getUser: this.getUser
         };
     }
 }());

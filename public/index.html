@@ -13,6 +13,7 @@
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-resource/angular-resource.js"></script>
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/bower_components/angular-google-gapi/angular-google-gapi.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
     <!-- Application Script -->
@@ -20,12 +21,13 @@
 
     <!-- Services -->
     <script src="common/services/common.services.js"></script>
-    <script src="common/services/gapiService.js"></script>
+    <!--<script src="common/services/gapiService.js"></script>-->
+    <script src="common/services/videoResource.js"></script>
 
     <!-- Controllers -->
-    <script src="app/welcomeController.js"></script>
+    <script src="app/homeController.js"></script>
+    <script src="app/authenticationController.js"></script>
 
-    <script src="https://apis.google.com/js/client.js?onload=initGoogleApi"></script>
 </head>
 <body ng-app="youtube-app">
     <nav class="navbar navbar-inverse">
@@ -43,12 +45,24 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+            <div class="navbar-collapse collapse" ng-controller="AuthenticationCtrl as vm">
+                <ul class="nav navbar-nav navbar-left">
                     <li><a ui-sref="home.upload">
                         <i class="glyphicon glyphicon-plus"></i>
                         Upload video</a></li>
-                    <li><a ui-sref="home.upload">
+                </ul>
+                <ul class="nav navbar-nav navbar-right" ng-if="vm.userInfo.length > 0">
+                    <li>
+                        <a>{{vm.userInfo.fullName}} <img class="user-minipic"
+                                                         ng-if="vm.userInfo.picture"
+                                                         ng-src="{{vm.userInfo.picture}}">
+                            <i class="glyphicon glyphicon-user" ng-if="!vm.userInfo.picture"></i>
+                        </a>
+                    </li>
+                    <li><a ng-click="vm.logOut()" class="clickable"><i class="glyphicon glyphicon-off"></i></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" ng-if="!vm.userInfo.length">
+                    <li><a href="#" ng-click="vm.login()">
                         <i class="glyphicon glyphicon-user"></i>
                         Login</a></li>
                 </ul>
