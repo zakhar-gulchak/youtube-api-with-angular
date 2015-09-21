@@ -15,10 +15,15 @@
                     <button class="btn btn-default" type="button" ng-click="vm.search(text)">Go!</button>
                 </span>
                 </div><!-- /input-group -->
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu4"
-                    ng-repeat="video in vm.videos"
-                    ng-if="vm.videos.length > 0">
-                    <li><a ui-sref="videoDetail({videoId: video.videoId})">{{ video.name }}</a></li>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu4" style="display: block"
+                    ng-if="vm.videos.length">
+                    <li ng-repeat="video in vm.videos"><a class="clearfix" ui-sref="videoDetail({videoId: video.id.videoId})">
+                        <img class="thumbnail" style="float:left; margin-right: 5px" ng-src="{{ video.snippet.thumbnails.default.url }}" ng-if="video.snippet.thumbnails.default.url" />
+                        <div style="float:left">
+                            <h4>{{ video.snippet.title }}</h4>
+                            <div>{{ video.snippet.description|limitTo:100 }}</div>
+                        </div>
+                    </a></li>
                 </ul>
             </div><!-- /.col-lg-6 -->
             <div class="col-md-3"></div>

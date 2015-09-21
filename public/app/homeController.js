@@ -20,7 +20,6 @@
 
         function onRespond(data) {
             vm.videos = filterVideosFromThread(data.items);
-            debugger;
         }
 
         function filterVideosFromThread(items) {

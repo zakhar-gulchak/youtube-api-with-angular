@@ -15,6 +15,7 @@
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/bower_components/angular-google-gapi/angular-google-gapi.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/bower_components/jwplayer/jwplayer.js"></script>
 
     <!-- Application Script -->
     <script src="app/app.js"></script>
@@ -27,9 +28,11 @@
     <!-- Controllers -->
     <script src="app/homeController.js"></script>
     <script src="app/authenticationController.js"></script>
+    <script src="app/uploadController.js"></script>
+    <script src="app/videoDetailController.js"></script>
 
 </head>
-<body ng-app="youtube-app">
+<body ng-app="youtube-app" ng-cloak>
     <nav class="navbar navbar-inverse">
         <div class="container">
             <a class="navbar-brand"
@@ -47,21 +50,22 @@
             </div>
             <div class="navbar-collapse collapse" ng-controller="AuthenticationCtrl as vm">
                 <ul class="nav navbar-nav navbar-left">
-                    <li><a ui-sref="home.upload">
+                    <li><a ui-sref="upload">
                         <i class="glyphicon glyphicon-plus"></i>
                         Upload video</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right" ng-if="vm.userInfo.length > 0">
-                    <li>
-                        <a>{{vm.userInfo.fullName}} <img class="user-minipic"
+                <ul class="nav navbar-nav navbar-right" ng-if="vm.userInfo">
+                    <li class="navbar-small-padding">
+                        <a href="{{ vm.userInfo.link }}" target="_blank">{{vm.userInfo.name}}
+                                                        <img class="user-avatar"
                                                          ng-if="vm.userInfo.picture"
                                                          ng-src="{{vm.userInfo.picture}}">
                             <i class="glyphicon glyphicon-user" ng-if="!vm.userInfo.picture"></i>
                         </a>
                     </li>
-                    <li><a ng-click="vm.logOut()" class="clickable"><i class="glyphicon glyphicon-off"></i></a></li>
+                    <li><a href="#" ng-click="vm.logout()" class="clickable"><i class="glyphicon glyphicon-off"></i></a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right" ng-if="!vm.userInfo.length">
+                <ul class="nav navbar-nav navbar-right" ng-if="!vm.userInfo">
                     <li><a href="#" ng-click="vm.login()">
                         <i class="glyphicon glyphicon-user"></i>
                         Login</a></li>
