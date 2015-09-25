@@ -8,10 +8,14 @@
         .module('youtube-app')
         .controller('UploadCtrl', UploadCtrl);
 
-    //UploadCtrl.$inject = ['', ''];
+    UploadCtrl.$inject = ['VideoUpload'];
 
-    function UploadCtrl() {
+    function UploadCtrl(VideoUpload) {
         var vm = this;
+        vm.video = {};
 
+        vm.upload = function () {
+            VideoUpload(vm.video);
+        };
     }
 }());

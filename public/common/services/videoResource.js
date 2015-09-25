@@ -12,7 +12,7 @@
         var YOUTUBE_SEARCH_REST_URL = 'https://www.googleapis.com/youtube/v3/search';
 
         return $resource(
-            YOUTUBE_SEARCH_REST_URL, null, {
+            YOUTUBE_SEARCH_REST_URL, {}, {
                 'query': {
                     method: 'GET',
                     params: {

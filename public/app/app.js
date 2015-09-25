@@ -1,6 +1,10 @@
 (function () {
     'use strict';
-    var app = angular.module('youtube-app', ['common.services', 'ui.router', 'angular-google-gapi']);
+    var app = angular.module('youtube-app',
+                            ['common.services',
+                             'common.directives',
+                             'ui.router',
+                             'angular-google-gapi']);
 
     app.config(['$stateProvider',
         '$urlRouterProvider',
