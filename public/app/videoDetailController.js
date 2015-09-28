@@ -8,10 +8,20 @@
         .module('youtube-app')
         .controller('VideoDetailCtrl', VideoDetailCtrl);
 
-    VideoDetailCtrl.$inject = ['$stateParams'];
+    VideoDetailCtrl.$inject = ['$stateParams', 'VideoResource', '$timeout'];
 
-    function VideoDetailCtrl($stateParams) {
+    function VideoDetailCtrl($stateParams, VideoResource, $timeout) {
         var vm = this;
+
+        $timeout(function () {
+            VideoResource.getVideosMetadata.query({id: $stateParams.videoId}, setMetadata);
+        }, 1000);
+
+        function setMetadata (data) { // todo move to service
+            var item = data.items[0].snippet;
+            vm.title = item.title;
+            vm.description = item.description;
+        }
 
         jwplayer.key = "";
         // Create a jwplayer instance

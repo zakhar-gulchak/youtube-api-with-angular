@@ -15,7 +15,7 @@
         vm.video = {};
 
         vm.upload = function () {
-            VideoUpload(vm.video);
+            VideoUpload.uploadVideo(vm.video);
         };
     }
 }());

@@ -15,22 +15,11 @@
         vm.videos = [];
 
         vm.search = function (searchText) {
-            VideoResource.query({q: searchText}, onRespond);
+            VideoResource.search.query({q: searchText}, onRespond);
         };
 
         function onRespond(data) {
-            vm.videos = filterVideosFromThread(data.items);
-        }
-
-        function filterVideosFromThread(items) {
-            var arr = [];
-            items.forEach(function (item) {
-                if (item.id.kind === 'youtube#video') {
-                    arr.push(item);
-                }
-            });
-
-            return arr;
+            vm.videos = VideoResource.filterVideosFromThread(data.items);
         }
     }
 }());

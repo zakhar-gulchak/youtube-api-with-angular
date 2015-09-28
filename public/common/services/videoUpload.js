@@ -26,7 +26,12 @@
                     'Content-Type': file.type,
                     'X-Upload-Content-Type': file.type
                 }
-            });
+            }).then(function () {}, function () {},
+                function(progress) { // todo this should work in next release
+                    console.log("inside progress");
+                    console.log(progress);
+                }
+            );
         };
 
         function uploadVideo(video) {
@@ -56,14 +61,38 @@
                 var uploadId = response.headers('X-GUploader-UploadID');
                 uploadFile(video.file, metadata, uploadId);
             }, function() {
-                console.log('huyak');
-            },
-            function(progress) {
-                console.log("inside progress");
-                console.log(progress);
+                console.log('error');
             });
         }
 
-        return uploadVideo;
+        function updateMetadata(video) {
+            var metadata = {
+                id: video.id,
+                snippet: {
+                    title: video.title,
+                    description: video.description,
+                    //tags: tags,
+                    categoryId: '22'
+                },
+                status: {
+                    privacyStatus: video.status
+                }
+            };
+            $http.put(uploadUrl, metadata, {
+                params: {
+                    part: 'snippet,status'
+                    //alt: 'json'
+                }
+                //headers: {
+                //    'Content-Type': 'application/json'
+                //}
+            });
+            // todo create one common function ?
+        }
+
+        return {
+            uploadVideo: uploadVideo,
+            updateMetadata: updateMetadata
+        };
     }
 })();

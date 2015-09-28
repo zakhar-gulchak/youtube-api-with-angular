@@ -30,6 +30,9 @@
     <script src="app/authenticationController.js"></script>
     <script src="app/uploadController.js"></script>
     <script src="app/videoDetailController.js"></script>
+    <script src="app/myVideosController.js"></script>
+    <script src="app/watchLaterListController.js"></script>
+    <script src="app/videoEditController.js"></script>
 
     <!-- Directives -->
     <script src="common/directives/common.directives.js"></script>
@@ -40,7 +43,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container">
             <a class="navbar-brand"
-               ui-sref="home">Youtube accounting</a>
+               ui-sref="home">Home</a>
             <div class="navbar-header">
                 <button type="button"
                         class="navbar-toggle"
@@ -54,13 +57,19 @@
             </div>
             <div class="navbar-collapse collapse" ng-controller="AuthenticationCtrl as vm">
                 <ul class="nav navbar-nav navbar-left">
-                    <li><a ui-sref="upload">
+                    <li ng-class="{ active: vm.isActive('upload') }"><a ui-sref="upload">
                         <i class="glyphicon glyphicon-plus"></i>
                         Upload video</a></li>
+                    <li ng-class="{ active: vm.isActive('myvideos') }"><a ui-sref="myvideos">
+                        <i class="glyphicon glyphicon-list"></i>
+                        My videos</a></li>
+                    <li ng-class="{ active: vm.isActive('watchLaterList') }"><a ui-sref="watchLaterList">
+                        <i class="glyphicon glyphicon-time"></i>
+                        Watch Later</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" ng-if="vm.userInfo">
                     <li class="navbar-small-padding">
-                        <a href="{{ vm.userInfo.link }}" target="_blank">{{vm.userInfo.name}}
+                        <a class="userlink" href="{{ vm.userInfo.link }}" target="_blank">{{vm.userInfo.name}}
                                                         <img class="user-avatar"
                                                          ng-if="vm.userInfo.picture"
                                                          ng-src="{{vm.userInfo.picture}}">

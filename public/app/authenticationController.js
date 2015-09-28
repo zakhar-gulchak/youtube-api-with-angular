@@ -8,9 +8,9 @@
         .module('youtube-app')
         .controller('AuthenticationCtrl', AuthenticationCtrl);
 
-    AuthenticationCtrl.$inject = ['GAuth', 'GData', '$http'];
+    AuthenticationCtrl.$inject = ['GAuth', 'GData', '$http', '$state'];
 
-    function AuthenticationCtrl(GAuth, GData, $http) {
+    function AuthenticationCtrl(GAuth, GData, $http, $state) {
         var vm = this;
         vm.userInfo = null;
 
@@ -38,6 +38,10 @@
             GAuth.logout();
             vm.userInfo = null;
             $http.jsonp(REVOKE_TOKEN_URL + token);
+        };
+
+        vm.isActive = function (stateName) {
+            return $state.current.name === stateName;
         };
 
         function loadUserInfo() {

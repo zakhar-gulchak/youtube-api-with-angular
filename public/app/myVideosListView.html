@@ -1,0 +1,29 @@
+<div class="panel panel-primary">
+    <div class="panel-heading" style="font-size:x-large">
+        {{ vm.title }}
+    </div>
+
+    <div class="panel-body">
+
+        <div class="clearfix">
+            <div class="col-md-3"></div>
+            <div class="col-lg-6">
+                <div class="list-group">
+                    <a ui-sref="videoDetail({videoId:video.id})"
+                       class="list-group-item clearfix"
+                       ng-repeat="video in vm.videos" ng-if="video.id">
+                        <h4 class="list-group-item-heading">{{ video.title }}</h4>
+                        <p class="list-group-item-text">{{ video.description }}</p>
+                        <span class="pull-right">
+                            <button ng-click="vm.goEdit(video.id); $event.preventDefault(); $event.stopPropagation();" class="btn btn-xs btn-info">Edit</button>
+                            <button class="btn btn-xs btn-warning" ng-click="vm.deleteVideo(video.id); $event.preventDefault(); $event.stopPropagation();">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </a>
+                </div>
+            </div><!-- /.col-lg-6 -->
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</div>
