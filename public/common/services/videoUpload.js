@@ -12,6 +12,7 @@
 
     function VideoUpload($http) {
         var uploadUrl = 'https://www.googleapis.com/upload/youtube/v3/videos';
+        var updateUrl = 'https://www.googleapis.com/youtube/v3/videos';
         var tags = ['youtube-cors-upload']; // todo move tags to upload form
         var categoryId = 22;
 
@@ -26,11 +27,11 @@
                     'Content-Type': file.type,
                     'X-Upload-Content-Type': file.type
                 }
-            }).then(function () {}, function () {},
-                function(progress) { // todo this should work in next release
-                    console.log("inside progress");
-                    console.log(progress);
-                }
+            }).then(function () {
+                toastr.success("Uploading finished successful"); // todo move to controllers?
+            }, function (error) {
+                toastr.error(error.message);
+            }
             );
         };
 
@@ -60,8 +61,8 @@
             then(function (response) {
                 var uploadId = response.headers('X-GUploader-UploadID');
                 uploadFile(video.file, metadata, uploadId);
-            }, function() {
-                console.log('error');
+            }, function (error) {
+                toastr.error(error.message);
             });
         }
 
@@ -78,14 +79,14 @@
                     privacyStatus: video.status
                 }
             };
-            $http.put(uploadUrl, metadata, {
+            $http.put(updateUrl, metadata, {
                 params: {
-                    part: 'snippet,status'
-                    //alt: 'json'
+                    part: 'snippet,status',
+                    alt: 'json'
+                },
+                headers: {
+                    'Content-Type': 'application/json'
                 }
-                //headers: {
-                //    'Content-Type': 'application/json'
-                //}
             });
             // todo create one common function ?
         }

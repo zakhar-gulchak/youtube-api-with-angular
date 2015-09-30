@@ -12,7 +12,7 @@
   "dependencies": {
     "express": "~4.12.4",
     "mongoose": "~4.1.6",
-    "bower": "*"
+    "bower": "~1.5.3"
   },
   "engines": {
     "node": "4.x",

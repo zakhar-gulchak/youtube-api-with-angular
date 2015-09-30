@@ -8,9 +8,9 @@
         .module('youtube-app')
         .controller('VideoEditCtrl', VideoEditCtrl);
 
-    VideoEditCtrl.$inject = ['$stateParams', 'VideoResource', '$timeout', 'VideoUpload'];
+    VideoEditCtrl.$inject = ['$stateParams', 'VideoResource', '$timeout', 'VideoUpload', '$state'];
 
-    function VideoEditCtrl($stateParams, VideoResource, $timeout, VideoUpload) {
+    function VideoEditCtrl($stateParams, VideoResource, $timeout, VideoUpload, $state) {
         var vm = this;
         vm.video = {id: $stateParams.videoId};
 
@@ -25,8 +25,16 @@
             vm.video.status = data.items[0].status.privacyStatus;
         }
 
-        vm.update = function () {
-            VideoUpload.updateMetadata(vm.video);
+        vm.update = function (isValid) {
+            if (isValid) {
+                VideoUpload.updateMetadata(vm.video);
+            } else {
+                toastr.error("Invalid form values.");
+            }
+        };
+
+        vm.cancel = function () {
+            $state.go('myvideos');
         };
     }
 }());

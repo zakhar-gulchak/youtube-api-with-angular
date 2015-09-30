@@ -4,7 +4,8 @@
                             ['common.services',
                              'common.directives',
                              'ui.router',
-                             'angular-google-gapi']);
+                             'angular-google-gapi',
+                             'angular-loading-bar']);
 
     app.config(['$stateProvider',
         '$urlRouterProvider',
@@ -42,5 +43,8 @@
                     templateUrl: 'app/watchLaterListView.html',
                     controller: 'WatchLaterListCtrl as vm'
                 });
+        }])
+        .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+            cfpLoadingBarProvider.includeSpinner = false;
         }]);
 }());

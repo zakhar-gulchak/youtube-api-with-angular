@@ -25,6 +25,7 @@
         }
 
         function onRespond(data) { // todo move to service
+            vm.videos = [];
             data.items.forEach(function (item) {
                 vm.videos.push({
                     id: item.snippet.resourceId.videoId,
@@ -36,13 +37,14 @@
 
         vm.deleteVideo = function (videoId) {
             VideoResource.deleteVideo.query({id: videoId}, updateHTML);
+            toastr.info('Video was deleted.');
         };
         vm.goEdit = function (videoId) {
             $state.go('editVideo', {videoId: videoId});
         };
 
-        function updateHTML() {
-            console.log('...');
+        function updateHTML() { // todo write here code
+            VideoResource.getListFromChannel.query({}, getVideosFromPlaylist);
         }
     }
 }());

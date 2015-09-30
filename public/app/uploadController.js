@@ -8,14 +8,25 @@
         .module('youtube-app')
         .controller('UploadCtrl', UploadCtrl);
 
-    UploadCtrl.$inject = ['VideoUpload'];
+    UploadCtrl.$inject = ['VideoUpload', '$state', '$timeout'];
 
-    function UploadCtrl(VideoUpload) {
+    function UploadCtrl(VideoUpload, $state, $timeout) {
         var vm = this;
         vm.video = {};
 
-        vm.upload = function () {
-            VideoUpload.uploadVideo(vm.video);
+        vm.upload = function (isValid) {
+            if (isValid) {
+                VideoUpload.uploadVideo(vm.video);
+                $timeout(function () {
+                    $state.go('myvideos');
+                }, 2000);
+            } else {
+                toastr.error("Invalid form values.");
+            }
+        };
+
+        vm.cancel = function () {
+            $state.go('myvideos');
         };
     }
 }());

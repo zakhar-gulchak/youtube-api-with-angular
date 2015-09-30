@@ -17,3 +17,20 @@ body {
     max-width: 175px;
     overflow: hidden;
 }
+.dropdown-menu {
+    position: relative;
+    float: none;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 600px;
+}
+
+#my_video {
+    margin: 0 auto;
+}
+
+@media (max-width: 440px) {
+    #logo {
+        display: none;
+    }
+}

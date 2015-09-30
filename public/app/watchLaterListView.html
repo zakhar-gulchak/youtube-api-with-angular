@@ -8,7 +8,10 @@
         <div class="clearfix">
             <div class="col-md-3"></div>
             <div class="col-lg-6">
-                <div class="list-group">
+                <div ng-if="!vm.videos.length">
+                    Can't find any videos.
+                </div>
+                <div class="list-group" ng-if="vm.videos.length">
                     <a ui-sref="videoDetail({videoId: video.id})" class="list-group-item" ng-repeat="video in vm.videos">
                         <h4 class="list-group-item-heading">{{ video.title }}</h4>
                         <p class="list-group-item-text"><pre>{{ video.description }}</pre></p>

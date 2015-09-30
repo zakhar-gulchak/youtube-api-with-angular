@@ -6,6 +6,8 @@
 
     <!-- Style sheets -->
     <link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="/bower_components/angular-loading-bar/src/loading-bar.css" rel="stylesheet"/>
+    <link href="/bower_components/toastr/toastr.css" rel="stylesheet"/>
     <link href="css/app.css" rel="stylesheet"/>
 
     <!-- Library Scripts -->
@@ -16,6 +18,8 @@
     <script src="/bower_components/angular-google-gapi/angular-google-gapi.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/bower_components/jwplayer/jwplayer.js"></script>
+    <script src="/bower_components/angular-loading-bar/src/loading-bar.js"></script>
+    <script src="/bower_components/toastr/toastr.js"></script>
 
     <!-- Application Script -->
     <script src="app/app.js"></script>
@@ -56,7 +60,7 @@
                 </button>
             </div>
             <div class="navbar-collapse collapse" ng-controller="AuthenticationCtrl as vm">
-                <ul class="nav navbar-nav navbar-left">
+                <ul class="nav navbar-nav navbar-left" ng-if="vm.userInfo">
                     <li ng-class="{ active: vm.isActive('upload') }"><a ui-sref="upload">
                         <i class="glyphicon glyphicon-plus"></i>
                         Upload video</a></li>
