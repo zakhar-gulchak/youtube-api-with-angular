@@ -26,7 +26,36 @@ body {
 }
 
 #my_video {
-    margin: 0 auto;
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+}
+
+#my_video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.dropdown-menu .thumbnail,
+.list-group-item .thumbnail {
+    width: 130px;
+    float: left;
+    margin-bottom: 5px;
+}
+
+.dropdown-menu .video-desc,
+.list-group-item .video-desc {
+    padding-left: 140px;
+    white-space: normal;
+}
+
+.video-desc pre {
+    background: none;
+    border: 0;
 }
 
 @media (max-width: 440px) {

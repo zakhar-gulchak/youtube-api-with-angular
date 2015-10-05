@@ -17,7 +17,6 @@
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/bower_components/angular-google-gapi/angular-google-gapi.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="/bower_components/jwplayer/jwplayer.js"></script>
     <script src="/bower_components/angular-loading-bar/src/loading-bar.js"></script>
     <script src="/bower_components/toastr/toastr.js"></script>
 
@@ -26,28 +25,31 @@
 
     <!-- Services -->
     <script src="common/services/common.services.js"></script>
+    <script src="common/services/authorizationService.js"></script>
     <script src="common/services/videoResource.js"></script>
     <script src="common/services/videoUpload.js"></script>
 
     <!-- Controllers -->
-    <script src="app/homeController.js"></script>
+    <script src="app/infoPages/welcomeController.js"></script>
+    <script src="app/infoPages/homeController.js"></script>
     <script src="app/authenticationController.js"></script>
-    <script src="app/uploadController.js"></script>
-    <script src="app/videoDetailController.js"></script>
-    <script src="app/myVideosController.js"></script>
-    <script src="app/watchLaterListController.js"></script>
-    <script src="app/videoEditController.js"></script>
+    <script src="app/videoItem/uploadController.js"></script>
+    <script src="app/videoItem/videoDetailController.js"></script>
+    <script src="app/videoLists/myVideosController.js"></script>
+    <script src="app/videoLists/watchLaterListController.js"></script>
+    <script src="app/videoItem/videoEditController.js"></script>
 
     <!-- Directives -->
     <script src="common/directives/common.directives.js"></script>
     <script src="common/directives/fileModel.js"></script>
+    <script src="common/directives/tagManager.js"></script>
 
 </head>
 <body ng-app="youtube-app" ng-cloak>
     <nav class="navbar navbar-inverse">
         <div class="container">
             <a class="navbar-brand"
-               ui-sref="home">Home</a>
+               ui-sref="youtubeApp.home">Home</a>
             <div class="navbar-header">
                 <button type="button"
                         class="navbar-toggle"
@@ -61,13 +63,13 @@
             </div>
             <div class="navbar-collapse collapse" ng-controller="AuthenticationCtrl as vm">
                 <ul class="nav navbar-nav navbar-left" ng-if="vm.userInfo">
-                    <li ng-class="{ active: vm.isActive('upload') }"><a ui-sref="upload">
+                    <li ng-class="{ active: vm.isActive('upload') }"><a ui-sref="youtubeApp.upload">
                         <i class="glyphicon glyphicon-plus"></i>
                         Upload video</a></li>
-                    <li ng-class="{ active: vm.isActive('myvideos') }"><a ui-sref="myvideos">
+                    <li ng-class="{ active: vm.isActive('myvideos') }"><a ui-sref="youtubeApp.myvideos">
                         <i class="glyphicon glyphicon-list"></i>
                         My videos</a></li>
-                    <li ng-class="{ active: vm.isActive('watchLaterList') }"><a ui-sref="watchLaterList">
+                    <li ng-class="{ active: vm.isActive('watchLaterList') }"><a ui-sref="youtubeApp.watchLaterList">
                         <i class="glyphicon glyphicon-time"></i>
                         Watch Later</a></li>
                 </ul>

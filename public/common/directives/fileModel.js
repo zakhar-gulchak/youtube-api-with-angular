@@ -3,6 +3,7 @@
  */
 (function () {
     'use strict';
+
     angular.module('common.directives').directive('fileModel', fileModel);
 
     fileModel.$inject = ['$parse'];

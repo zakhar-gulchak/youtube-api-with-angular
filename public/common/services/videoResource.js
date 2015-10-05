@@ -60,7 +60,7 @@
                     }
                 }
             ),
-            deleteVideo:  $resource(
+            deleteVideo: $resource(
                 YOUTUBE_VIDEOS_METADATA_REST_URL, {}, {
                     'query': {
                         method: 'DELETE',
@@ -79,6 +79,36 @@
                 });
 
                 return arr;
+            },
+            handleVideoList: function (data) {
+                var videos = [];
+                data.items.forEach(function (item) {
+                    videos.push({
+                        id: item.snippet.resourceId.videoId,
+                        title: item.snippet.title,
+                        description: item.snippet.description,
+                        src: item.snippet.thumbnails.default.url
+                    });
+                });
+
+                return videos;
+            },
+            setMetadata: function (data) {
+                var item = data.items[0].snippet;
+                var video = {
+                    id: data.items[0].id,
+                    tags: [],
+                    title: item.title,
+                    description: item.description,
+                    status: data.items[0].status.privacyStatus,
+                    src: 'https://www.youtube.com/embed/' + data.items[0].id,
+                    publishDate: item.publishedAt
+                };
+                if (item.tags) {
+                    video.tags = item.tags;
+                }
+
+                return video;
             }
         };
     }

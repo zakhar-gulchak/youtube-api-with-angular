@@ -1,0 +1,30 @@
+<div class="form-group">
+    <label class="col-md-2 control-label" for="inputTags">Tags</label>
+
+    <div class="col-md-8">
+        <div class="input-group">
+            <input class="form-control" id="inputTags" type="text"
+                   placeholder="Search keywords separated by commas"
+                   ng-model="newTags"/>
+                <span class="input-group-btn">
+                    <button type="button"
+                            class="btn btn-default"
+                            title="Add the specified tags"
+                            ng-click="addTags()">
+                        Add
+                    </button>
+                </span>
+        </div>
+    </div>
+</div>
+
+<div class="row col-md-8 col-md-offset-2">
+    <span ng-repeat="tag in video.tags | orderBy">
+        <button class="btn btn-default"
+                style="font-size:smaller;margin-bottom:12px"
+                ng-click="removeTag($index)">
+            {{tag}}
+            <span class="glyphicon glyphicon-remove"></span>
+        </button>
+    </span>
+</div>

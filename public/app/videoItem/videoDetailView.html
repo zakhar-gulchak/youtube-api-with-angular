@@ -1,0 +1,20 @@
+<div class="panel panel-primary">
+    <div class="panel-heading" style="font-size:x-large">
+        {{ vm.video.title }}
+    </div>
+
+    <div class="panel-body">
+
+        <div class="clearfix">
+            <div class="col-lg-6">
+                <div id="my_video">
+                    <iframe ng-src="{{ vm.video.src }}" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div id="description" class="video-desc" style="margin-top: 10px;" ng-if="vm.video.description.length">
+                    <strong>Publish date: {{ vm.video.publishDate | date : 'mediumDate'}}</strong> <br>
+                    <pre>{{ vm.video.description }}</pre>
+                </div>
+            </div><!-- /.col-lg-6 -->
+        </div>
+    </div>
+</div>

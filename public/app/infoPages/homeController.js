@@ -18,6 +18,8 @@
             VideoResource.search.query({q: searchText}, onRespond);
         };
 
+        /////////
+
         function onRespond(data) {
             vm.videos = VideoResource.filterVideosFromThread(data.items);
         }

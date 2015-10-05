@@ -1,0 +1,38 @@
+<div class="panel panel-primary">
+    <div class="panel-heading" style="font-size:x-large">
+        {{ vm.title }}
+    </div>
+
+    <div class="panel-body">
+
+        <div class="clearfix">
+            <div class="col-lg-6">
+                <div ng-if="vm.videos && !vm.videos.length">
+                    Can't find any videos.
+                </div>
+                <div class="list-group" ng-if="vm.videos.length">
+                    <a ui-sref="youtubeApp.videoDetail({videoId:video.id})"
+                       class="list-group-item clearfix"
+                       ng-repeat="video in vm.videos">
+                        <img class="thumbnail" ng-src="{{ video.src }}"
+                             ng-if="video.src.length"/>
+
+                        <div class="video-desc">
+                            <h4 class="list-group-item-heading">{{ video.title }}</h4>
+
+                            <p class="list-group-item-text" ng-if="video.description.length">
+                                <pre>{{ video.description }}</pre>
+                            </p>
+                        </div>
+                        <span class="pull-right" ng-if="vm.inEditMode">
+                            <button ng-click="vm.goEdit($event, video.id)" class="btn btn-xs btn-info">Edit</button>
+                            <button class="btn btn-xs btn-warning" ng-click="vm.deleteVideo($event, video.id)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </a>
+                </div>
+            </div><!-- /.col-lg-6 -->
+        </div>
+    </div>
+</div>

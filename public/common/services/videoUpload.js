@@ -13,11 +13,36 @@
     function VideoUpload($http) {
         var uploadUrl = 'https://www.googleapis.com/upload/youtube/v3/videos';
         var updateUrl = 'https://www.googleapis.com/youtube/v3/videos';
-        var tags = ['youtube-cors-upload']; // todo move tags to upload form
         var categoryId = 22;
 
-        var uploadFile = function (file, metadata, uploadId) {
-            $http.put(uploadUrl, file, {
+        function uploadVideo(video) {
+            var metadata = setMetadata(video);
+
+            return sendMetadata(video, metadata)
+                .then(function (response) {
+                    var uploadId = response.headers('X-GUploader-UploadID');
+                    uploadFile(video.file, metadata, uploadId);
+                }, function (error) {
+                    return error;
+                });
+        }
+
+        function updateMetadata(video) {
+            return $http.put(updateUrl, setMetadata(video), {
+                params: {
+                    part: 'snippet,status',
+                    alt: 'json'
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        }
+
+        /////////
+
+        function uploadFile (file, metadata, uploadId) {
+            return $http.put(uploadUrl, file, {
                 params: {
                     part: Object.keys(metadata).join(','),
                     uploadType: 'resumable',
@@ -27,27 +52,11 @@
                     'Content-Type': file.type,
                     'X-Upload-Content-Type': file.type
                 }
-            }).then(function () {
-                toastr.success("Uploading finished successful"); // todo move to controllers?
-            }, function (error) {
-                toastr.error(error.message);
-            }
-            );
-        };
+            });
+        }
 
-        function uploadVideo(video) {
-            var metadata = {
-                snippet: {
-                    title: video.title,
-                    description: video.description,
-                    tags: tags,
-                    categoryId: categoryId
-                },
-                status: {
-                    privacyStatus: video.status
-                }
-            };
-            $http.post(uploadUrl, metadata, {
+        function sendMetadata(video, metadata) {
+            return $http.post(uploadUrl, metadata, {
                 params: {
                     part: Object.keys(metadata).join(','),
                     uploadType: 'resumable'
@@ -57,38 +66,22 @@
                     'X-Upload-Content-Length': video.file.size,
                     'X-Upload-Content-Type': video.file.type
                 }
-            }).
-            then(function (response) {
-                var uploadId = response.headers('X-GUploader-UploadID');
-                uploadFile(video.file, metadata, uploadId);
-            }, function (error) {
-                toastr.error(error.message);
             });
         }
 
-        function updateMetadata(video) {
-            var metadata = {
+        function setMetadata(video) {
+            return {
                 id: video.id,
                 snippet: {
                     title: video.title,
                     description: video.description,
-                    //tags: tags,
-                    categoryId: '22'
+                    tags: video.tags,
+                    categoryId: categoryId
                 },
                 status: {
                     privacyStatus: video.status
                 }
             };
-            $http.put(updateUrl, metadata, {
-                params: {
-                    part: 'snippet,status',
-                    alt: 'json'
-                },
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            // todo create one common function ?
         }
 
         return {
